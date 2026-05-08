@@ -1,46 +1,44 @@
 "use client";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { BarChart3, Settings2, UserPlus, Trophy } from "lucide-react";
-
-export function Navbar() {
+export default function Navbar() {
   const pathname = usePathname();
 
   const navItems = [
-    { name: "Analytics", href: "/", icon: BarChart3 },
-    { name: "Manage", href: "/attendance", icon: Settings2 },
-    { name: "Register", href: "/register", icon: UserPlus },
+    { name: 'Attendance', href: '/' },
+    { name: 'Analytics', href: '/stats' },
+    { name: 'Manage Students', href: '/register' },
   ];
 
   return (
-    <>
-      <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-100">
-        <div className="max-w-md mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="bg-primary p-2 rounded-2xl">
-              <Trophy className="w-5 h-5 text-white" />
-            </div>
-            <span className="font-black text-xl tracking-tighter italic">WRESTLERS</span>
-          </Link>
+    <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+      <div className="container flex h-16 items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="bg-primary rounded-lg p-1.5">
+            <div className="w-6 h-6 border-2 border-white rounded-full flex items-center justify-center text-[10px] font-bold text-white">W</div>
+          </div>
+          <span className="font-bold text-lg tracking-tight hidden sm:inline-block">WRESTLE-TRACK</span>
         </div>
-      </nav>
-
-      {/* 3-Route Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 w-full h-24 bg-white border-t border-slate-100 grid grid-cols-3 z-50 pb-4">
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`flex flex-col items-center justify-center gap-1.5 transition-all ${
-              pathname === item.href ? "text-primary scale-110" : "text-slate-400"
-            }`}
-          >
-            <item.icon className={`w-6 h-6 ${pathname === item.href ? "stroke-[3px]" : "stroke-[2px]"}`} />
-            <span className="text-[10px] font-bold uppercase tracking-widest">{item.name}</span>
-          </Link>
-        ))}
+        
+        <div className="flex items-center gap-1 sm:gap-4">
+          {navItems.map((item) => (
+            <Button
+              key={item.href}
+              variant="ghost"
+              asChild
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                pathname === item.href ? "bg-slate-100 text-primary" : "text-muted-foreground"
+              )}
+            >
+              <Link href={item.href}>{item.name}</Link>
+            </Button>
+          ))}
+        </div>
       </div>
-    </>
+    </nav>
   );
 }

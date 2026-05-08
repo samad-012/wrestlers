@@ -1,25 +1,24 @@
 "use client";
-
-import { Navbar } from "@/components/Navbar";
-import { AddStudentModal } from "@/components/AddStudentModal";
-import { UserPlus, ArrowRight } from "lucide-react";
+import StudentForm from "@/components/StudentForm";
 
 export default function RegisterPage() {
   return (
-    <div className="min-h-screen bg-[#FDFDFF] pb-32">
-      <Navbar />
-      <main className="max-w-md mx-auto p-6 pt-12 text-center space-y-8">
-        <div className="bg-primary/10 w-20 h-20 rounded-[2.5rem] flex items-center justify-center mx-auto">
-          <UserPlus className="w-10 h-10 text-primary" />
-        </div>
-        <div className="space-y-2">
-          <h1 className="text-4xl font-black tracking-tighter">New Entry</h1>
-          <p className="text-slate-500 font-medium">Add a new student to the student list to begin tracking their performance.</p>
-        </div>
+    <div className="max-w-2xl mx-auto space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">Manage Records</h1>
+        <p className="text-muted-foreground">Add new students to the institute database.</p>
+      </div>
+      
+      <div className="grid gap-8">
+        <StudentForm />
         
-        {/* We reuse your existing component but trigger it with a large button */}
-        <AddStudentModal onStudentAdded={() => {}} />
-      </main>
+        {/* Placeholder for a student list/management table if you add one later */}
+        <div className="rounded-xl border border-dashed p-8 text-center bg-white">
+          <p className="text-sm text-muted-foreground">
+            Student list management coming soon. Use the form above to add new wrestlers.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
